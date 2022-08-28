@@ -1,4 +1,4 @@
-local status, packer = pcall(require, "packer")
+local status, packer = pcall(require, 'packer')
 if (not status) then
   print("Packer is not installed")
   return
@@ -8,40 +8,63 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
+
+  -- theme
   use {
     'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
+    requires = { 'tjdevries/colorbuddy.nvim' },
   }
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'nvim-lua/plenary.nvim' -- Common utilities
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'neovim/nvim-lspconfig' -- LSP
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-  use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
+  use 'morhetz/gruvbox'
+  vim.cmd [[colorscheme gruvbox]]
 
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
+  -- status line
+  use 'nvim-lualine/lualine.nvim'
+
+  -- lsp
+  use 'neovim/nvim-lspconfig'
+
+  -- lsp ui
+  use {
+    'glepnir/lspsaga.nvim',
+    branch = 'main'
+  }
+
+  -- auto completion
+  use 'onsails/lspkind.nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/nvim-cmp'
+
   use 'L3MON4D3/LuaSnip'
+
+  -- tree-sitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
+
+  -- auto pairs / auto tags
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
 
+  -- utils
+  use 'nvim-lua/plenary.nvim'
+
+  -- telescope
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
+
+  -- icons
+  use 'kyazdani42/nvim-web-devicons'
+
+  -- buffer line
+  use 'akinsho/bufferline.nvim'
+
+  -- colorizer
   use 'norcalli/nvim-colorizer.lua'
-  use 'morhetz/gruvbox'
 
-  use 'akinsho/nvim-bufferline.lua'
-  -- use 'github/copilot.vim'
+  -- formatting linting
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'MunifTanjim/prettier.nvim'
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
 end)

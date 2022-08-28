@@ -1,6 +1,6 @@
-local status, n = pcall(require, "gruvbox")
+local status, g = pcall(require, 'neosolarized')
 if (not status) then return end
 
-n.setup({
+g.setup({
   comment_italics = true,
 })
